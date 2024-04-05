@@ -1,11 +1,14 @@
 from flask import Flask
 import datetime
 from flask_cors import CORS
+from flask_pymongo import PyMongo
  
 x = datetime.datetime.now()
  
 # Initializing flask app
 app = Flask(__name__)
+app.config["MONGO_URI"] = "mongodb+srv://akash:akash@justicejunction.fyv1ftg.mongodb.net/" # Change `myDatabase` to your database name
+mongo = PyMongo(app)
 CORS(app) 
  
  

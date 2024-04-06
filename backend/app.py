@@ -292,7 +292,7 @@ def buy_data(survey_id):
         return jsonify(response.json()), response.status_code
 
     payment_url = response.json().get('payment_url')
-    return redirect(payment_url)
+    return jsonify({"url": payment_url, "message": "Payment url required to download data"}), 200
 
 @app.route('/callback', methods=['POST'])
 def payment_callback():

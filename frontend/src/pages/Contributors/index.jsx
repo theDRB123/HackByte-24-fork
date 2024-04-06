@@ -11,7 +11,7 @@ const Contributors = () => {
         wallet_address: "",
     });
     const [surdata, setsurData] = React.useState("");
-    const {id} = useParams();
+    const { id } = useParams();
 
     React.useEffect(() => {
         const fetchSurData = async () => {
@@ -30,10 +30,9 @@ const Contributors = () => {
                 console.error("Error fetching survey data:", error);
             }
         };
-    
-        fetchSurData();
-    }, [id]); 
 
+        fetchSurData();
+    }, [id]);
 
     const handleChange = (event, index) => {
         const { name, value, type, checked } = event.target;

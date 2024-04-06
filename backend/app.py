@@ -17,6 +17,7 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 mongo = PyMongo(app)
 bcrypt = Bcrypt(app)
 CORS(app) 
+# CORS(app, origins='http://localhost:5173')
 
 
 def is_valid_bitcoin_address(address):
@@ -36,13 +37,13 @@ def token_required(f):
             token = request.headers['Authorization']
 
         if not token:
-            return jsonify({'message': 'Token is missing!'}), 403
+            return jsonify({'message': 'Please login to send this request'}), 403
 
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
             current_user = mongo.db.users.find_one({'username': data['username']})
         except:
-            return jsonify({'message': 'Token is invalid!'}), 403
+            return jsonify({'message': 'Auth token is invalid!'}), 403
 
         return f(current_user, *args, **kwargs)
 
@@ -91,6 +92,7 @@ def create_survey(user):
         if not data.get('questions'):
             return jsonify({"error": "Survey questions are required"}), 400
         
+        currentTime = datetime.datetime.utcnow()
         # Prepare survey document
         survey = {
             "title": data['title'],
@@ -99,7 +101,8 @@ def create_survey(user):
             "questions_type": data["questions_type"],
             "fees": data['fees'],
             "status": "open",
-            "user": user['username']
+            "user": user['username'],
+            "time" : currentTime
         }
         
         # Insert survey into database

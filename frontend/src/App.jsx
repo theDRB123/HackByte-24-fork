@@ -20,12 +20,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>}/>
-          <Route path="create" element={<Customize/>}/>
+          <Route path="create" element={<Designer_home/>}/>
           <Route path="explore" element={<Categories/>}/>
           <Route path="shop" element={<Shop/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Signup/>}/>
-          <Route path="designers" element={<Designer_home/>}/>
+          {/* <Route path="designers" element={<Designer_home/>}/> */}
           <Route path="about" element={<About/>}/>
           <Route path="product" element={<Product/>}/>
           <Route path="cart" element={<Cart/>}/>

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import step3 from "../../assets/step_1.png"
+import step1 from "../../assets/step_1.png"
 import step2 from "../../assets/step_2.png"
-import step1 from "../../assets/step_3.png"
+import step3 from "../../assets/step_3.png"
+import step from "../../assets/step.png"
 
 const Guide = () => {
     return (
@@ -13,7 +14,7 @@ const Guide = () => {
             </div>
             <div className='flex gap-4 max-md:flex-col' >
                 <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5'>
-                    <img src={step1} alt="" />
+                    <img src={step} alt="" />
                     <br />
                     <p className='font-bold text-[24px] custom'>
                     Define a Dataset:
@@ -24,28 +25,25 @@ const Guide = () => {
                             Specify the number of questions you will be adding in the survey.
                         </li>
                         <li>
-                            Each question represents a of features in the dataset.
+                            Each question represents a field of the dataset.
                         </li>
                     </ul>
                 </div>
                 <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5'>
-                    <img src={step2} alt="" />
+                    <img src={step} alt="" />
                     <br />
                     <p className='font-bold text-[24px] custom'>
-                    Populate the features:
+                    Populate the fields:
                     </p>
                     <br />
                     <ul className='list-disc text-[15px] text-[#6e6d78]'>
                         <li>
                         Add the questions along with a brief description of the question.
                         </li>
-                        <li>
-                        View mockup of custom shoes in real time
-                        </li>
                     </ul>
                 </div>
                 <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5'>
-                    <img src={step3} alt="" />
+                    <img src={step} alt="" />
                     <br />
                     <p className='font-bold text-[24px] custom'>
                     Submit and Share:
@@ -56,7 +54,7 @@ const Guide = () => {
                         Once you submit the survey, you're all set.
                         </li>
                         <li>
-                        Contributors may now be able to add their own data to the dataset.
+                        Users may now be able to contribute to the dataset.
                         </li>
                     </ul>
                 </div>

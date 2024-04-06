@@ -258,7 +258,6 @@ def anomaly_detection(survey_id):
     return jsonify({'message': 'Anomaly detection algorithm executed.'}), 200
     
     
-    
 @app.route('/buy/<survey_id>', methods=['GET'])
 def buy_data(survey_id):
     # Step 7: Check if any anomalies were detected
@@ -339,66 +338,7 @@ def get_time():
         "Date":x, 
         "programming":"python"
         }
-
-# pending token auth
-@app.route('/surveys/<survey_id>/get_responses', methods=['GET'])
-def get_all_responses(survey_id):
-    try:
-        # Query all responses from the database
-        responses = list(mongo.db.responses.find({"survey_id": survey_id}))
-        # Check if responses exist
-        # if not responses:
-        #     return jsonify({"message": "No responses found"}), 404
-        
-        for response in responses:
-            response['_id'] = str(response['_id'])
-        
-        # Return responses
-        return jsonify({"responses": responses}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-
-
-@app.route('/surveys/<survey_id>/get_responses_count', methods=['GET'])
-def get_responses_count(survey_id):
-    try:
-        # Query all responses from the database
-        responses = list(mongo.db.responses.find({"survey_id": survey_id}))
-        # Check if responses exist
-        # if not responses:
-        #     return jsonify({"message": "No responses found"}), 404
-        
-        # Return responses
-        return jsonify({"responses_count": len(responses)}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500     
     
-
-# pending token auth
-@app.route('/surveys/<survey_id>/download_responses', methods=['GET'])
-def download_responses(survey_id):
-    try:
-        # Query all responses from the database
-        responses = list(mongo.db.responses.find({"survey_id": survey_id}))
-
-        # Convert the responses to JSON
-        responses_json = json.dumps(responses, default=json_util.default)
-
-        # Create a new zip file
-        # with zipfile.ZipFile('responses.zip', 'w') as zipf:
-        #     # Write the JSON data to a file in the zip file
-        #     zipf.writestr('responses.json', responses_json)
-        with open('responses.json', 'w') as json_file:
-            json_file.write(responses_json)
-
-
-        # Send the zip file to the user
-        return send_file('responses.json', as_attachment=True)
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
 
 # Running app
 if __name__ == '__main__':

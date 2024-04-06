@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 import HomeBanner from '../../components/Home-banner/HomeBanner'
 import Home_retailers_comp from '../../components/Home-retailers'
 import Carousel from '../../components/carousel'

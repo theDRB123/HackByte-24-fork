@@ -6,22 +6,7 @@ import logo from '../../assets/logo-final.png'
 import axios from 'axios'
 
 const Navbar = () => {
-  const [user, setUser] = useState();
-  useEffect( () => {
-    const checklogin = async () => {
-      const { data } = await axios.get(
-      "http://localhost:3000/api/users/me",
-      {
-          headers: {
-              "Content-Type": "application/json",
-          },
-          withCredentials: true,
-      }
-      );
-      setUser(data.user.name);
-  }
-  checklogin();
-  }, [])
+    
   var styles = {
     bmBurgerButton: {
       display: 'none',
@@ -60,13 +45,17 @@ const Navbar = () => {
     }
   }
   const [toggled, setToggled] = useState(false)
+  const handleClick = () => {
+    localStorage.removeItem('name')
+    localStorage.removeItem('token')
+    window.location.reload()
+  }
   return (
     <>
     <Menu right isOpen={toggled} styles={styles} onClose={()=>(setToggled(false))} >
       <Link to="/" className='menu-item' onClick={()=>{setToggled(false)}}>Home</Link>
-      <Link to="categories" className='menu-item' onClick={()=>{setToggled(false)}} >Categories</Link>
-      <Link to="customize" className='menu-item' onClick={()=>{setToggled(false)}} >Customize</Link>
-      <Link to="shop" className='menu-item' onClick={()=>{setToggled(false)}} >Shop</Link>
+      <Link to="create" className='menu-item' onClick={()=>{setToggled(false)}} >Create Survey</Link>
+      <Link to="explore" className='menu-item' onClick={()=>{setToggled(false)}} >Explore Datasets</Link>
       <Link to="login" className='menu-item' onClick={()=>{setToggled(false)}} >Login</Link>
     </Menu>
     <nav className="flex items-center py-4 px-2 text-sm">
@@ -76,26 +65,20 @@ const Navbar = () => {
           className={({ isActive }) => (isActive ? "underline underline-offset-8 " : null)}
         >
           
-          Home
+          Home 
         </NavLink>
         <NavLink
-          to="categories"
+          to="create"
           className={({ isActive }) => (isActive ? "underline underline-offset-8 " : null)}
         >
           
-          Categories
+          Create Survey
         </NavLink>
         <NavLink
-          to="customize"
+          to="explore"
           className={({ isActive }) => (isActive ? "underline underline-offset-8 " : null)}
         >
-          Customize
-        </NavLink>
-        <NavLink
-          to="shop"
-          className={({ isActive }) => (isActive ? "underline underline-offset-8 " : null)}
-        >
-          Shop
+          Explore Datasets
         </NavLink>
       </div>
       <div className="flex w-[50%] text-left justify-center items-center max-lg:w-full max-lg:justify-start">
@@ -106,7 +89,7 @@ const Navbar = () => {
           <img src={logo} alt="" className='w-40'/>
         </Link>
       </div>
-      <div className={`flex w-[30%] justify-center gap-4 max-lg:w-full max-lg:justify-end ${user? 'hidden': ''}`}>
+      <div className={`flex w-[30%] justify-center gap-4 max-lg:w-full max-lg:justify-end ${localStorage.getItem('name')? 'hidden': ''}`}>
         <Link to="login"> <button
         className="inline-block rounded-full border-2 border-neutral-800 px-4 pb-[6px] pt-2 text-[12px] font-medium uppercase leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-black hover:text-white focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 max-lg:hidden" 
       > 
@@ -118,12 +101,11 @@ const Navbar = () => {
         SignUp
       </button> </Link>
       </div>
-      <div className={`flex w-[30%] text-base items-center justify-center gap-4 max-lg:w-full max-lg:justify-end ${!user? 'hidden': ''}`}>
-        Hi {user}
-        <Link to="cart">
-
-        <img src="https://icons.veryicon.com/png/o/miscellaneous/unicons/cart-38.png" className='w-8' alt="" />
-        </Link>
+      <div className={`flex w-[30%] text-base items-center justify-center gap-4 max-lg:w-full max-lg:justify-end ${!localStorage.getItem('name')? 'hidden': ''}`}>
+        Hi {localStorage.getItem('name')}
+        <button onClick={handleClick}>
+        <img src="https://icons.veryicon.com/png/o/application/outline-1/logout-31.png" className='w-6' alt="" />
+        </button>
       </div>
     </nav>
     </>

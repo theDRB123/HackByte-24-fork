@@ -20,8 +20,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>}/>
-          <Route path="categories" element={<Categories/>}/>
-          <Route path="customize" element={<Customize/>}/>
+          <Route path="create" element={<Customize/>}/>
+          <Route path="explore" element={<Categories/>}/>
           <Route path="shop" element={<Shop/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Signup/>}/>

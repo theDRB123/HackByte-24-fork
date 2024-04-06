@@ -10,3 +10,6 @@ body {
 .categories{
     font-family: "Helvetica Now Text Medium",Helvetica,Arial,sans-serif;
 }
+html {
+    scroll-behavior: smooth;
+  }

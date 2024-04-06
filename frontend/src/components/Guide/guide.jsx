@@ -6,7 +6,7 @@ import step1 from "../../assets/step_3.png"
 
 const Guide = () => {
     return (
-    <div className=' flex justify-center my-11 flex-col items-center'>
+    <div className=' flex justify-center my-11 flex-col items-center' id="guide">
         <div className='w-[80%] flex flex-col gap-6'>
             <div className='text-[50px] text-center custom max-md:text-[30px]'>
                 Create Custom Shoes in 3 Easy Steps!

@@ -4,29 +4,33 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [authenticated, setAuthenticated] = useState(false);
-    const loginf = async (e, email, password) => {
+    const loginf = async (e, username, password) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post(
-                "http://localhost:3000/api/users/login",
+            console.log(username, password)
+            const  data  = await axios.post(
+                "http://localhost:5000/login",
                 {
-                    email,
-                    passwd: password,
+                    username,
+                    password,
                 },
                 {
                     headers: {
                         "Content-Type": "application/json",
-                    },
-                    withCredentials: true,
+                    }
                 }
             );
-            toast(data.message);
+            console.log(data.data.token);
+            localStorage.setItem("token", data.data.token);
+            localStorage.setItem("name", data.data.name);
+            toast.success("Login Successful!");
             setAuthenticated(true);
         } catch (error) {
-            toast.error(error.response.data.message);
+            console.log(error)
+            toast.error(error.response.data);
             // console.error(error);
         }
     };
@@ -51,9 +55,9 @@ const Login = () => {
                                     className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                                     id="email"
                                     type="text"
-                                    placeholder="Email"
+                                    placeholder="Username"
                                     name="email"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={(e) => setUsername(e.target.value)}
                                 />
                                 <div className="absolute left-0 inset-y-0 flex items-center">
                                     <svg
@@ -104,7 +108,7 @@ const Login = () => {
                                 <button
                                     className="text-white py-2 px-4 uppercase rounded bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
                                     onClick={(e) => {
-                                        loginf(e, email, password);
+                                        loginf(e, username, password);
                                     }}
                                 >
                                     Sign in

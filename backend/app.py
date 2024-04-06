@@ -51,12 +51,12 @@ def token_required(f):
 @app.route('/register', methods=['POST'])
 def signup_user():  
     data = request.get_json()
-    if not data.get('username') or not data.get('password'):
+    if not data.get('username') or not data.get('passwd'):
         return jsonify({"error": "Username and password are required"}), 400
     existing_user = mongo.db.users.find_one({"username": data.get('username')})
     if existing_user:
         return jsonify({"error": "Username already exists"}), 400
-    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+    hashed_password = bcrypt.generate_password_hash(data['passwd']).decode('utf-8')
     mongo.db.users.insert_one({'username': data['username'], 'password': hashed_password, 'name': data['name']})
     return jsonify({'message': 'registered successfully'})
 
@@ -65,18 +65,18 @@ def login_user():
     auth = request.get_json()
 
     if not auth or not auth['username'] or not auth['password']:
-        return make_response('could not verify', 401, {'Authentication': 'login required"'})
+        return make_response('Need all fields', 401, {'Authentication': 'login required"'})
     
     user = mongo.db.users.find_one({'username': auth['username']})
 
     if not user:
-        return make_response('could not verify', 401, {'Authentication': 'login required"'})
+        return make_response('Not Found! Please register', 401, {'Authentication': 'login required"'})
     
     if bcrypt.check_password_hash(user['password'], auth['password']):
         token = jwt.encode({'username': user['username'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
-        return jsonify({'token' : token})
+        return jsonify({'token' : token, 'name': user['name']})
 
-    return make_response('could not verify',  401, {'Authentication': 'login required"'})
+    return make_response('Incorrect Password',  401, {'Authentication': 'login required"'})
 
 @app.route('/surveys', methods=['POST'])
 @token_required

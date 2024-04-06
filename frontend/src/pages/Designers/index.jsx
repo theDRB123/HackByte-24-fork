@@ -7,9 +7,9 @@ const Designer_home = () => {
         description: "",
         questions: [""],
         questions_type: [""],
-        fees: "",
+        fees: ""
     });
-
+    console.log(formData)
     const handleChange = (event, index) => {
         const { name, value, type, checked } = event.target;
         if (name === "questions" || name === "questions_type") {

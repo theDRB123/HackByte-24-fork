@@ -166,15 +166,16 @@ const Designer_home = () => {
                     <div className="font-serif w-full lg:-mt-96 lg:w-2/6 px-8 py-12 ml-auto bg-black rounded-2xl">
                         <div className="flex flex-col text-white">
                             <h1 className="text-4xl my-4">
-                                Drop in our office
+                                Steps to follow :
                             </h1>
-                            <p className="text-gray-400">
-                                We would love to have you drop by our office!
-                                Your presence and energy would truly brighten up
-                                our day. Looking forward to seeing you soon!
+                            <p className="text-gray-200 leading-loose">
+                                1. Add survey title, description and budget.<br/>
+                                2. Add the necessary fields/questions in the survey.<br/>
+                                3. Add the expected response data type of the questions.<br/>
+                                4. Click on the ➕ button to add more questions.<br/>
                             </p>
 
-                            <div className="flex my-4 w-2/3 lg:w-1/2">
+                            {/* <div className="flex my-4 w-2/3 lg:w-1/2">
                                 <div className="flex flex-col">
                                     <i className="fas fa-map-marker-alt pt-2 pr-2" />
                                 </div>
@@ -185,9 +186,9 @@ const Designer_home = () => {
                                         482005
                                     </p>
                                 </div>
-                            </div>
+                            </div> */}
 
-                            <div className="flex my-4 w-2/3 lg:w-1/2">
+                            {/* <div className="flex my-4 w-2/3 lg:w-1/2">
                                 <div className="flex flex-col">
                                     <i className="fas fa-phone-alt pt-2 pr-2" />
                                 </div>
@@ -200,7 +201,7 @@ const Designer_home = () => {
                                         Fax: 88698-87160
                                     </p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

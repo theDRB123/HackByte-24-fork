@@ -22,10 +22,10 @@ const Guide = () => {
                     <br />
                     <ul className='list-disc text-[15px] text-[#6e6d78]' >
                         <li>
-                            Specify the number of questions you will be adding in the survey.
+                            Create a survey by adding the title and the description.
                         </li>
                         <li>
-                            Each question represents a field of the dataset.
+                            Specify the budget for the survey.
                         </li>
                     </ul>
                 </div>
@@ -33,12 +33,15 @@ const Guide = () => {
                     <img src={step} alt="" />
                     <br />
                     <p className='font-bold text-[24px] custom'>
-                    Populate the fields:
+                    Add Questions:
                     </p>
                     <br />
                     <ul className='list-disc text-[15px] text-[#6e6d78]'>
                         <li>
-                        Add the questions along with a brief description of the question.
+                        Specify the number of questions you will be adding in the survey.
+                        </li>
+                        <li>
+                        Describe each question and its type.
                         </li>
                     </ul>
                 </div>

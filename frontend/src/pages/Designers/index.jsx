@@ -157,7 +157,7 @@ const Designer_home = () => {
                                     className="text-sm tracking-wide bg-black text-gray-100 p-3 rounded-lg w-full 
                       focus:outline-none focus:shadow-outline"
                                 >
-                                    Send Message
+                                    Publish Survey
                                 </button>
                             </div>
                         </div>

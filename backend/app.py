@@ -7,6 +7,7 @@ import jwt
 import bitcoinaddress
 from functools import wraps
 from bitcoinlib.keys import Address
+from bson import ObjectId
  
 x = datetime.datetime.now()
  
@@ -156,6 +157,25 @@ def get_all_surveys():
     try:
         # Query all surveys from the database
         surveys = list(mongo.db.surveys.find())
+        
+        # Check if surveys exist
+        if not surveys:
+            return jsonify({"message": "No surveys found"}), 404
+        
+        for survey in surveys:
+            survey['_id'] = str(survey['_id'])
+        
+        # Return surveys
+        return jsonify({"surveys": surveys}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+@app.route('/surveys/<survey_id>', methods=['GET'])
+def get_all_surveys_by_id(survey_id):
+    id = ObjectId(survey_id)
+    try:
+        # Query all surveys from the database
+        surveys = list(mongo.db.surveys.find({"_id": id}))
         
         # Check if surveys exist
         if not surveys:

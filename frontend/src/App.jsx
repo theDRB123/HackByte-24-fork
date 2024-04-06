@@ -12,6 +12,7 @@ import Designer_home from "./pages/Designers"
 import About from "./pages/About"
 import Retailer_home from "./pages/Retailer-home"
 import Product from "./pages/Product"
+import Contributors from "./pages/Contributors"
 import Cart from "./pages/Cart"
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route index element={<Home/>}/>
           <Route path="create" element={<Designer_home/>}/>
           <Route path="explore" element={<Categories/>}/>
+          <Route path="explore/:id" element={<Contributors/>}/>
           <Route path="shop" element={<Shop/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Signup/>}/>

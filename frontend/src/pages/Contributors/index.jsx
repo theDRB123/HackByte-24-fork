@@ -1,7 +1,8 @@
 import React from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-const Designer_home = () => {
+import { useParams, useSearchParams } from "react-router-dom";
+const Contributors = () => {
     const [formData, setFormData] = React.useState({
         title: "",
         description: "",
@@ -9,6 +10,7 @@ const Designer_home = () => {
         questions_type: [""],
         fees: "",
     });
+    const {id} = useParams();
 
     const handleChange = (event, index) => {
         const { name, value, type, checked } = event.target;
@@ -62,6 +64,7 @@ const Designer_home = () => {
                         "Content-Type": "application/json",
                         Authorization: localStorage.getItem("token"),
                     },
+                    container,
                 }
             );
             toast.success(data.message);
@@ -78,7 +81,7 @@ const Designer_home = () => {
             <div className="flex justify-center items-center bg-white">
                 <div className="container mx-auto my-4 px-4 lg:px-20">
                     <form onSubmit={handleSubmit}>
-                        <div className="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl text-right">
+                        <div className="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 m-auto rounded-2xl shadow-2xl text-right">
                             <div className="flex">
                                 <div className="text-[45px] max-md:text-[36px]  leading-tight custom">
                                     Create a New Survey
@@ -148,9 +151,13 @@ const Designer_home = () => {
                                 ))}
                             </div>
                             <br />
-                            <input type="button" value={"➕"} onClick={handleAddField} className=""/>
+                            <input
+                                type="button"
+                                value={"➕"}
+                                onClick={handleAddField}
+                                className=""
+                            />
                             <br />
-                            
 
                             <div className="my-2 w-1/2 lg:w-1/4">
                                 <button
@@ -162,48 +169,6 @@ const Designer_home = () => {
                             </div>
                         </div>
                     </form>
-
-                    <div className="font-serif w-full lg:-mt-96 lg:w-2/6 px-8 py-12 ml-auto bg-black rounded-2xl">
-                        <div className="flex flex-col text-white">
-                            <h1 className="text-4xl my-4">
-                                Steps to follow :
-                            </h1>
-                            <p className="text-gray-200 leading-loose">
-                                1. Add survey title, description and budget.<br/>
-                                2. Add the necessary fields/questions in the survey.<br/>
-                                3. Add the expected response data type of the questions.<br/>
-                                4. Click on the ➕ button to add more questions.<br/>
-                            </p>
-
-                            {/* <div className="flex my-4 w-2/3 lg:w-1/2">
-                                <div className="flex flex-col">
-                                    <i className="fas fa-map-marker-alt pt-2 pr-2" />
-                                </div>
-                                <div className="flex flex-col">
-                                    <h2 className="text-2xl">Main Office</h2>
-                                    <p className="text-gray-400">
-                                        B-401, Hall of Residance 4, IIITDMJ PIN-
-                                        482005
-                                    </p>
-                                </div>
-                            </div> */}
-
-                            {/* <div className="flex my-4 w-2/3 lg:w-1/2">
-                                <div className="flex flex-col">
-                                    <i className="fas fa-phone-alt pt-2 pr-2" />
-                                </div>
-                                <div className="flex flex-col">
-                                    <h2 className="text-2xl">Call Us</h2>
-                                    <p className="text-gray-400">
-                                        Tel: 90799-15245
-                                    </p>
-                                    <p className="text-gray-400">
-                                        Fax: 88698-87160
-                                    </p>
-                                </div>
-                            </div> */}
-                        </div>
-                    </div>
                 </div>
             </div>
             <br />
@@ -214,4 +179,4 @@ const Designer_home = () => {
     );
 };
 
-export default Designer_home;
+export default Contributors;

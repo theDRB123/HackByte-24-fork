@@ -28,24 +28,6 @@ const Categories = () => {
                 console.error(error);
             });
     }, []);
-
-    // setData([
-    //     {
-    //         image: "https://images.unsplash.com/photo-1603145733190-59811e523c72?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //         name: "dataset1",
-    //         description: "description1 long long long loooong description for testing purposes only, mooore long really loong description...",
-    //         id: 1,
-    //         price: 149,
-    //     },
-    //     {
-    //         image: "https://images.unsplash.com/photo-1603145733190-59811e523c72?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //         name: "dataset2",
-    //         description: "description2",
-    //         id: 2,
-    //         price: 149,
-    //     },        
-    // ])
-    // fetchData();
     
     const todisplay = data.map((item) => <CategoryCard key={item.id} {...item} />);
 

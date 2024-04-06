@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import img0 from "../../assets/dataset1.png"
 
-
 const Productcard = ({ image, name, description, id, price, time }) => {
 
     // image = "../../assets/dataset1.png";
@@ -9,7 +8,7 @@ const Productcard = ({ image, name, description, id, price, time }) => {
         <div
             className="w-72 bg-white shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
             key={id}
-        >   
+        >
             <Link to={id}>
                 <img
                     src={img0}
@@ -27,6 +26,17 @@ const Productcard = ({ image, name, description, id, price, time }) => {
 
                     <span className="text-gray-500 mr-3 uppercase text-s">${price}</span>
                     <span className="text-gray-500 mr-3 uppercase text-xs">{time}</span>
+                </div>
+                <div className="flex flex-row items-center justify-center mt-3 p-2">
+                   
+                    <button className="inline-block bg-black rounded-full border-2 border-neutral-800 mr-1 px-4 pb-[4px] pt-1 text-[10px] font-normal uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-white hover:text-black focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900">
+                        Contribute
+                    </button>
+                  
+                    <button className="inline-block rounded-full border-2 border-neutral-800 ml-1 px-2 pb-[4px] pt-1 text-[10px] font-medium uppercase leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-black hover:text-white focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 max-lg:hidden">
+                        Get Dataset
+                    </button>
+
                 </div>
 
                 <div className="px-2 py-1 w-72 flex">

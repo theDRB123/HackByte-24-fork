@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex items-center justify-center w-full flex-col max-lg:mt-7">
             <div className="flex items-center justify-center w-[80%] flex-wrap min-h-[6rem] max-lg:flex-col font-bold">
                 <div className="flex items-center w-[20%] text-3xl flex-wrap my-3 max-lg:justify-center max-lg:w-full">
-                    <img src={logo} alt="" className="" />
+                    <img src={logo} alt="" className=" w-48" />
                 </div>
                 <div className="flex items-center justify-center w-[60%] text-[15px] flex-wrap gap-4 my-3">
                     <NavLink to="/">Home</NavLink>

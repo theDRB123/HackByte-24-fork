@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
-import img1 from "../../assets/carosel/af1.png"
-import img2 from "../../assets/carosel/converse1.png"
-import img3 from "../../assets/carosel/crocs4.png"
-import img4 from "../../assets/carosel/crocs2.png"
-import img5 from "../../assets/carosel/crocs1.png"
+import img1 from "../../assets/carosel/af1.svg"
+import img2 from "../../assets/carosel/converse1.svg"
+import img3 from "../../assets/carosel/crocs4.jpeg"
+import img4 from "../../assets/carosel/crocs2.jpeg"
+import img5 from "../../assets/carosel/crocks1.png"
 
 const Carousel = () => {
   const carousel = useRef();

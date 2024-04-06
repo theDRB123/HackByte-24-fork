@@ -4,7 +4,7 @@ const Home_retailers_comp = () => {
   return (
     
     <div className='bg-[#f8d5d1]  h-[500px] flex flex-col justify-center items-center gap-7'>
-            <div className='text-[50px]'>Start your contribution NOW!</div>
+            <div className='text-[50px] text-center'>Start your contribution NOW!</div>
             <div className='text-center'>Worried about your identity? contribution anonymously to the repositories</div>
             <div className='flex gap-4'>
             <Link to="/explore">

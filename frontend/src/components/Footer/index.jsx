@@ -11,13 +11,12 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center justify-center w-[60%] text-[15px] flex-wrap gap-4 my-3">
                     <NavLink to="/">Home</NavLink>
-                    <NavLink to="categories">Categories</NavLink>
-                    <NavLink to="customize">Customize</NavLink>
-                    <NavLink to="shop">Shop</NavLink>
+                    <NavLink to="create">Create Survey</NavLink>
+                    <NavLink to="explore">Explore Datasets</NavLink>
                 </div>
                 <div className="flex items-center  w-[20%] gap-3 my-3 justify-end max-lg:justify-center">
                     <a
-                        href="https://twitter.com/drawn2shoe61810"
+                        href="https://twitter.com/dvjshx"
                         target="_blank"
                     >
                         <svg
@@ -31,25 +30,9 @@ const Footer = () => {
                             <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" />
                         </svg>
                     </a>
+                    
                     <a
-                        href="https://www.facebook.com/profile.php?id=100091869992851"
-                        target="_blank"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-labelledby="anxzlakyplg77qoc9l64rzi4s0sin9od"
-                            role="img"
-                            viewBox="0 0 24 24"
-                            className="icon h-[1rem]"
-                        >
-                            <title id="anxzlakyplg77qoc9l64rzi4s0sin9od">
-                                Facebook icon
-                            </title>
-                            <path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"></path>
-                        </svg>
-                    </a>
-                    <a
-                        href="https://www.instagram.com/drawn2shoe/"
+                        href="https://www.instagram.com/dvjsharma/"
                         target="_blank"
                     >
                         <svg
@@ -66,7 +49,7 @@ const Footer = () => {
                         </svg>
                     </a>
                     <a
-                        href="https://github.com/dvjsharma/Drawn2Shoe"
+                        href="https://github.com/dvjsharma/HackByte-24"
                         target="_blank"
                     >
                         <svg
@@ -84,14 +67,13 @@ const Footer = () => {
             </div>
             <div className="flex items-center justify-center w-[80%] flex-wrap min-h-[3rem] max-lg:flex-col text-[#6e6d7a] text-[15px]">
                 <div className="flex w-[50%] my-3 flex-wrap max-lg:justify-center">
-                    © 2023 Drawn2Shoe.
+                    © 2024 Data Bazaar.
                 </div>
                 <div className="flex gap-3 w-[50%] flex-row-reverse my-3 flex-wrap max-lg:justify-center">
                     {/*  Add address instead */}
                     <NavLink to="/">Home</NavLink>
-                    <NavLink to="categories">Categories</NavLink>
-                    <NavLink to="customize">Customize</NavLink>
-                    <NavLink to="shop">Shop</NavLink>
+                    <NavLink to="create">Create Survey</NavLink>
+                    <NavLink to="explore">Explore Datasets</NavLink>
                 </div>
             </div>
         </div>

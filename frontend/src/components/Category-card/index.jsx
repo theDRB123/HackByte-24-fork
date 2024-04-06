@@ -17,15 +17,15 @@ const Productcard = ({ image, name, description, id, price, time }) => {
                     alt="Product"
                     className="h-40 w-72 object-cover rounded-t-xl"
                 />
-                <div className="flex flex-col items-start justify-center mt-3 ml-3 w-72">
+                <div className="flex flex-col items-start justify-center mt-3 pl-3 pr-3 w-72 truncate">
                     <p className="text-lg font-bold text-black truncate block capitalize mt-1 mb-1">
                         {name}
                     </p>
-                    <div className="fade">
-                        <p className="text-sm font-mono text-gray-800 overflow-hidden max-h-[50px] block capitalize mb-3">
-                            {description.split(" ").slice(0, 15).join(" ")}
-                        </p>
+
+                    <div className="text-sm font-mono text-gray-800 max-h-[50px] capitalize mb-3">
+                        {description.split(" ").slice(0, 15).join(" ")}
                     </div>
+
                     <span className="text-gray-500 mr-3 uppercase text-s">${price}</span>
                     <span className="text-gray-500 mr-3 uppercase text-xs">{time}</span>
                 </div>

@@ -82,13 +82,13 @@ const Contributors = () => {
             <div className="flex justify-center items-center bg-white">
                 <div className="container mx-auto my-4 px-4 lg:px-20">
                     <form onSubmit={handleSubmit}>
-                        <div className="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 m-auto rounded-2xl shadow-2xl text-right">
+                        <div className="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 m-auto rounded-2xl shadow-2xl">
                             <div className="flex">
                                 <div className="text-[45px] max-md:text-[36px]  leading-tight custom">
                                     Contribute to {surdata.title}
                                 </div>
                             </div>
-
+                            <br />
                             <div className="text-left">
                                 {surdata.description}
                             </div>
@@ -145,12 +145,7 @@ const Contributors = () => {
                                     : ""}
                             </div>
                             <br />
-                            <input
-                                type="button"
-                                value={"➕"}
-                                onClick={handleAddField}
-                                className=""
-                            />
+                            
                             <br />
 
                             <div className="my-2 w-1/2 lg:w-1/4">

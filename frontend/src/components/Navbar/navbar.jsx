@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import {Divide, Divide as Hamburger} from 'hamburger-react'
 import {stack as Menu} from 'react-burger-menu'
-import logo from '../../assets/logo-final.png'
+import logo from '../../assets/databazar.png'
 import axios from 'axios'
 
 const Navbar = () => {
@@ -85,8 +85,9 @@ const Navbar = () => {
         <div className='lg:hidden'>
           <Divide size={20} toggled={toggled} toggle={setToggled} />
         </div>
-        <Link to="/" className="font-bold text-[25px]">
-          <img src={logo} alt="" className='w-40'/>
+        <Link to="/" className="font-bold text-[50px]  font-mono">
+          <img src={logo} alt="" className='w-80'/>
+          {/* Data Bazaar */}
         </Link>
       </div>
       <div className={`flex w-[30%] justify-center gap-4 max-lg:w-full max-lg:justify-end ${localStorage.getItem('name')? 'hidden': ''}`}>

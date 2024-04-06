@@ -79,9 +79,7 @@ const Carousel2 = () => {
             </div>
             <div className="w-full h-[1.5px] bg-gray-400 my-3"></div>
             <div className="text-[18px] text-gray-700 custom">
-              I was surprised. The quality was much higher than I expected! The
-              best feeling is having people coming up to me in the street and
-              asking where I got them.
+              It has always been so frustrating to find the perfect dataset. But creating my own dataset has never been easier with Data Bazaar!
             </div>
           </div>
           {/* <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -165,7 +163,7 @@ const Carousel2 = () => {
             </div>
             <div className="w-full h-[1.5px] bg-gray-400 my-3"></div>
             <div className="text-[18px] text-gray-700 custom">
-            I was pleasantly surprised by the exceptional design quality! The best part is that I created the design myself, and they never fail to draw admiration wherever I go!
+              I have been using Data Bazaar for a while now and I must say that it has been a great experience. The platform is very user-friendly and the datasets are very well curated.
             </div>
           </div>
           {/* <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

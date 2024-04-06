@@ -123,6 +123,7 @@ def post_survey_response(survey_id):
     try:
         # Parse request data
         data = request.json
+        print(data)
         
         # Validate request data
         if not data.get('answers') or not data.get('wallet_address'):

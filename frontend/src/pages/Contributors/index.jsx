@@ -3,15 +3,13 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useSearchParams } from "react-router-dom";
 const Contributors = () => {
+    const { id } = useParams();
     const [formData, setFormData] = React.useState({
-        title: "",
-        description: "",
-        questions: [""],
-        questions_type: [""],
+        answers: [""],
         wallet_address: "",
+        survey_id: id,
     });
     const [surdata, setsurData] = React.useState("");
-    const { id } = useParams();
 
     React.useEffect(() => {
         const fetchSurData = async () => {
@@ -36,25 +34,15 @@ const Contributors = () => {
 
     const handleChange = (event, index) => {
         const { name, value, type, checked } = event.target;
-        if (name === "questions" || name === "questions_type") {
+        if (name === "answers") {
             setFormData((prevFormData) => {
-                const updatedQuestions = [...prevFormData.questions];
-                const updatedTypes = [...prevFormData.questions_type];
-                if (index === updatedQuestions.length) {
-                    // Add new question and type
-                    updatedQuestions.push("");
-                    updatedTypes.push("");
-                } else {
-                    // Update existing question or type
-                    updatedQuestions[index] =
-                        name === "questions" ? value : updatedQuestions[index];
-                    updatedTypes[index] =
-                        name === "questions_type" ? value : updatedTypes[index];
-                }
+                const updatedAnswers = [...prevFormData.answers];
+                // Update existing question or type
+                updatedAnswers[index] =
+                    name === "answers" ? value : updatedAnswers[index];
                 return {
                     ...prevFormData,
-                    questions: updatedQuestions,
-                    questions_type: updatedTypes,
+                    answers: updatedAnswers,
                 };
             });
         } else {
@@ -71,32 +59,23 @@ const Contributors = () => {
             formData.questions.length
         );
     };
-    async function handleSubmit(event) {
-        // console.log(formData);
+    const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            console.log(formData);
             const { data } = await axios.post(
-                "http://localhost:5000/surveys",
-                {
-                    ...formData,
-                },
+                `http://localhost:5000/surveys/${id}/responses`,
+                {...formData},
                 {
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: localStorage.getItem("token"),
                     },
-                    container,
                 }
             );
             toast.success(data.message);
-            // window.location.href = "/";
         } catch (error) {
-            toast.error(error.response.data.message);
-            // console.error(error);
+            toast.error(error.response.data.error || "An error occurred");
         }
-    }
-    function handleClick(event) {}
+    };
 
     return (
         <div>
@@ -116,47 +95,54 @@ const Contributors = () => {
                             <br />
                             <input
                                 className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                                type="number"
+                                type="text"
                                 placeholder="Enter the bitcoin wallet address"
                                 onChange={handleChange}
                                 name="wallet_address"
                                 value={formData.wallet_address}
                             />
-                            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
-                                {formData.questions.map((question, index) => (
-                                    <React.Fragment key={index}>
-                                        <input
-                                            className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                                            type="text"
-                                            placeholder="Question"
-                                            onChange={(e) =>
-                                                handleChange(e, index)
-                                            }
-                                            name="questions"
-                                            value={formData.questions[index]}
-                                        />
-                                        <select
-                                            className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                                            onChange={(e) =>
-                                                handleChange(e, index)
-                                            }
-                                            name="questions_type"
-                                            value={
-                                                formData.questions_type[index]
-                                            }
-                                        >
-                                            <option value="">
-                                                Select Data Type
-                                            </option>
-                                            <option value="string">
-                                                String
-                                            </option>
-                                            <option value="number">
-                                                Number
-                                            </option>
-                                        </select>
-                                    </React.Fragment>
-                                ))}
+                            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 auto-rows-auto mt-5">
+                                {surdata
+                                    ? surdata.questions.map(
+                                          (question, index) => (
+                                              <React.Fragment key={index}>
+                                                  <textarea
+                                                      readOnly
+                                                      className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+                                                      type="text"
+                                                      placeholder="Question"
+                                                      name="questions"
+                                                      value={
+                                                          surdata.questions[
+                                                              index
+                                                          ]
+                                                      }
+                                                  />
+                                                  <input
+                                                      className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+                                                      type={
+                                                          surdata
+                                                              .questions_type[
+                                                              index
+                                                          ] === "number"
+                                                              ? "number"
+                                                              : "text"
+                                                      }
+                                                      placeholder="Answers"
+                                                      onChange={(e) =>
+                                                          handleChange(e, index)
+                                                      }
+                                                      name="answers"
+                                                      value={
+                                                          formData.answers[
+                                                              index
+                                                          ]
+                                                      }
+                                                  />
+                                              </React.Fragment>
+                                          )
+                                      )
+                                    : ""}
                             </div>
                             <br />
                             <input

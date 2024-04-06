@@ -1,9 +1,11 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, redirect
 import datetime
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from flask import send_file
+import requests
+import os
 
 import jwt
 import bitcoinaddress
@@ -14,6 +16,10 @@ from functools import wraps
 from bitcoinlib.keys import Address
 from bson import ObjectId
 from bson import json_util
+
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import IsolationForest
  
 
 x = datetime.datetime.now()
@@ -160,6 +166,31 @@ def post_survey_response(survey_id):
         return jsonify({"error": str(e)}), 500
     
     
+@app.route('/surveys/<survey_id>/responses', methods=['GET'])
+def get_survey_response(survey_id):
+    survey_responses = list(mongo.db.responses.find({'survey_id': survey_id}))
+    id = ObjectId(survey_id)
+    surveys = list(mongo.db.surveys.find({'_id': id}))
+    print(surveys)
+    anomaly=0
+    nanomaly=0
+    nchecked=0
+    file_data=[]
+    for i in survey_responses:
+        if (i['score']!=-1):
+            row = {}
+            for j in range(len(surveys[0]['questions'])):
+                row[surveys[0]['questions'][j]] = i['answers'][j]
+            file_data.append(row)
+        if (i['score']==-1):
+            anomaly+=1
+        elif (i['score']==1):
+            nanomaly+=1
+        else:
+            nchecked+=1
+    return jsonify({"message": "Responses fetched successfully.", "Anomaly": anomaly, "Not Anomaly": nanomaly, "Not Checked": nchecked, "responses": file_data[0: int(0.1*len(file_data))]}), 200
+    
+    
 @app.route('/surveys', methods=['GET'])
 def get_all_surveys():
     try:
@@ -196,6 +227,105 @@ def get_all_surveys_by_id(survey_id):
         return jsonify({"surveys": surveys}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+    
+@app.route('/anomaly_detection/<survey_id>')
+def anomaly_detection(survey_id):
+        # Step 2: Retrieve survey data responses from MongoDB
+    survey_responses = list(mongo.db.responses.find({'survey_id': survey_id}))
+
+    if not survey_responses:
+        return jsonify({'error': 'Survey data not found'}), 404
+
+    # Step 3: Preprocess the survey answers
+    for response in survey_responses:
+        answers = response['answers']
+        # Encode string columns using unique data in columns
+        for i in range(len(answers)):
+            if isinstance(answers[i], str):
+                unique_values = set(response['answers'][i] for response in survey_responses if isinstance(response['answers'][i],str))
+                label_encoder = LabelEncoder()
+                label_encoder.fit(list(unique_values))
+                answers[i] = label_encoder.transform([answers[i]])[0]
+    # Step 4: Extract relevant features (assuming data is in the 'answers' field)
+    data = np.array([response['answers'] for response in survey_responses])
+    # Step 5: Run anomaly detection algorithm (Isolation Forest)
+    isolation_forest = IsolationForest(contamination=0.05)
+    anomaly_predictions = isolation_forest.fit_predict(data)
+    # Step 6: Update responses collection with anomaly scores
+    for response, anomaly_score in zip(survey_responses, anomaly_predictions):
+        mongo.db.responses.update_one({'_id': response['_id']}, {'$set': {'score': int(anomaly_score)}})
+    return jsonify({'message': 'Anomaly detection algorithm executed.'}), 200
+    
+    
+    
+@app.route('/buy/<survey_id>', methods=['GET'])
+def buy_data(survey_id):
+    # Step 7: Check if any anomalies were detected
+    # if -1 in anomaly_predictions:
+    #     return jsonify({'error': 'Anomalies detected in data. Purchase not allowed'}), 400
+
+    # Step 8: Request payment in Bitcoin using CoinGate API
+    id = ObjectId(survey_id)
+    amount = mongo.db.surveys.find_one({'_id': id})['fees']/100000000
+    payload = {
+        'order_id': survey_id,
+        'price_amount': f'{amount}',
+        'price_currency': 'BTC',
+        "receive_address": "YOUR_WALLET_ADDRESS",
+        'receive_currency': 'BTC',
+        'title': f'Data purchase for survey {survey_id}',
+        'callback_url': "http://localhost:5000/callback",
+        "cancel_url": "http://localhost:5000/cancel",
+        "success_url": f"http://localhost:5000/success/{survey_id}",
+        "description": "Description of the order"
+
+    }
+    order_json = json.dumps(payload)
+    auth_token = "BesNYbT8Py-Loy9yw_skp-AawiDvEvG9q3jRHbL_"
+    headers = {
+         "accept": "application/json",
+        "content-type": "application/json",
+        "Authorization": f"Bearer {auth_token}"
+    }
+    response = requests.post('https://api-sandbox.coingate.com/v2/orders', headers=headers, data=order_json)
+    if response.status_code != 200:
+        return jsonify(response.json()), response.status_code
+
+    payment_url = response.json().get('payment_url')
+    return redirect(payment_url)
+
+@app.route('/callback', methods=['POST'])
+def payment_callback():
+    data = request.json
+    if data['status'] == 'paid':
+        survey_id = data['order_id']
+        survey_responses = list(mongo.db.responses.find({'survey_id': survey_id}))
+        filename = os.path.join('downloads', f'{survey_id}.json')
+        with open(filename, 'w') as f:
+            json.dump(survey_responses, f, indent=4)
+        return send_file(filename, as_attachment=True, attachment_filename=f'{survey_id}.json'), 200
+    return jsonify({'error': 'Payment not confirmed'}), 400
+
+
+@app.route('/success/<survey_id>', methods=['POST', 'GET'])
+def success(survey_id):
+    survey_responses = list(mongo.db.responses.find({'survey_id': survey_id}))
+    id = ObjectId(survey_id)
+    surveys = list(mongo.db.surveys.find({'_id': id}))
+    print(surveys)
+    file_data=[]
+    for i in survey_responses:
+        if (i['score']!=-1):
+            row = {}
+            for j in range(len(surveys[0]['questions'])):
+                row[surveys[0]['questions'][j]] = i['answers'][j]
+            file_data.append(row)
+    
+    filename = os.path.join('downloads', f'{survey_id}.json')
+    with open(filename, 'w') as f:
+        json.dump(file_data, f, indent=4)
+    return send_file(filename, as_attachment=True), 200
  
  
 # Route for seeing a data

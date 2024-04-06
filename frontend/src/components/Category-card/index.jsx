@@ -8,7 +8,7 @@ const Productcard = ({ image, name, description, id, price, time }) => {
 
     return (
         <div
-            className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
+            className="w-72 bg-white shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
             key={id}
         >
             <Link to={`./../shop?type=${id}`}>

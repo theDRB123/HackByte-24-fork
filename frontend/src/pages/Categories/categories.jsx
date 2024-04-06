@@ -56,7 +56,7 @@ const Categories = () => {
     return (
         <div>
             <div className="text-center p-10">
-                <h1 className="categories text-4xl mb-4 font-medium">Explore our amazing Categories!</h1>
+                <h1 className="categories text-4xl mb-4 font-medium">Explore ongoing Surveys</h1>
             </div>
             <div
                 id="Projects"

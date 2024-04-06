@@ -1,25 +1,35 @@
 import { Link } from "react-router-dom";
+import img0 from "../../assets/dataset1.png"
 
-const Productcard = ({ shoeImage, shoename, id, brand, categoryId}) => {
+
+const Productcard = ({ image, name, description, id, price, time }) => {
+
+    // image = "../../assets/dataset1.png";
+
     return (
         <div
             className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
-            key={categoryId}
+            key={id}
         >
-            <Link to={`./../shop?type=${categoryId}`}>
+            <Link to={`./../shop?type=${id}`}>
                 <img
-                    src={shoeImage}
+                    src={img0}
                     alt="Product"
-                    className="h-80 w-72 object-cover rounded-t-xl"
+                    className="h-40 w-72 object-cover rounded-t-xl"
                 />
-                <div className="flex flex-col items-center justify-center mt-3">
-                    <span className="text-gray-400 mr-3 uppercase text-xs">
-                        {brand}
-                    </span>
-                    <p className="text-lg font-bold text-black truncate block capitalize">
-                        {shoename}
+                <div className="flex flex-col items-start justify-center mt-3 ml-3 w-72">
+                    <p className="text-lg font-bold text-black truncate block capitalize mt-1 mb-1">
+                        {name}
                     </p>
+                    <div className="fade">
+                        <p className="text-sm font-mono text-gray-800 overflow-hidden max-h-[50px] block capitalize mb-3">
+                            {description.split(" ").slice(0, 15).join(" ")}
+                        </p>
+                    </div>
+                    <span className="text-gray-500 mr-3 uppercase text-s">${price}</span>
+                    <span className="text-gray-500 mr-3 uppercase text-xs">{time}</span>
                 </div>
+
                 <div className="px-2 py-1 w-72 flex">
                     <div className="flex items-center">
                         {/* <p className="text-lg font-semibold text-black cursor-auto my-3">$149</p>

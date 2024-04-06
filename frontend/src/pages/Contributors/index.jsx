@@ -8,9 +8,32 @@ const Contributors = () => {
         description: "",
         questions: [""],
         questions_type: [""],
-        fees: "",
+        wallet_address: "",
     });
+    const [surdata, setsurData] = React.useState("");
     const {id} = useParams();
+
+    React.useEffect(() => {
+        const fetchSurData = async () => {
+            try {
+                const { data } = await axios.get(
+                    `http://localhost:5000/surveys/${id}`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                setsurData(data.surveys[0]);
+                console.log(data.surveys[0]);
+            } catch (error) {
+                console.error("Error fetching survey data:", error);
+            }
+        };
+    
+        fetchSurData();
+    }, [id]); 
+
 
     const handleChange = (event, index) => {
         const { name, value, type, checked } = event.target;
@@ -84,35 +107,21 @@ const Contributors = () => {
                         <div className="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 m-auto rounded-2xl shadow-2xl text-right">
                             <div className="flex">
                                 <div className="text-[45px] max-md:text-[36px]  leading-tight custom">
-                                    Create a New Survey
+                                    Contribute to {surdata.title}
                                 </div>
                             </div>
 
-                            <div className="my-4 gap-3 flex flex-col">
-                                <input
-                                    className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                                    type="text"
-                                    placeholder="Survey Title"
-                                    onChange={handleChange}
-                                    name="title"
-                                    value={formData.title}
-                                />
-
-                                <textarea
-                                    placeholder="Describe more about the survey"
-                                    className="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                                    onChange={handleChange}
-                                    name="description"
-                                    value={formData.description}
-                                ></textarea>
+                            <div className="text-left">
+                                {surdata.description}
                             </div>
+                            <br />
                             <input
                                 className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                                 type="number"
-                                placeholder="Enter the budget"
+                                placeholder="Enter the bitcoin wallet address"
                                 onChange={handleChange}
-                                name="fees"
-                                value={formData.fees}
+                                name="wallet_address"
+                                value={formData.wallet_address}
                             />
                             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
                                 {formData.questions.map((question, index) => (

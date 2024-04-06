@@ -1,8 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import step1 from "../../assets/step_1.png"
-import step2 from "../../assets/step_2.png"
-import step3 from "../../assets/step_3.png"
 import step from "../../assets/step.png"
 
 const Guide = () => {
@@ -15,7 +12,7 @@ const Guide = () => {
             <div className='flex gap-4 max-md:flex-col' >
                 <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5'>
                     <img src={step} alt="" />
-                    <br />
+                    {/* <br /> */}
                     <p className='font-bold text-[24px] custom'>
                     Define a Dataset:
                     </p>

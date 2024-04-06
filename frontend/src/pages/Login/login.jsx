@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -41,8 +42,8 @@ const Login = () => {
         <>
             <div className="">
                 <div className="p-8 lg:w-1/2 mx-auto">
-                    <div className="bg-gray-100 rounded-b-lg py-12 px-4 lg:px-24">
-                        <p className="text-center text-sm text-gray-500 font-light">
+                    <div className="font-sans rounded-2xl shadow-[2px_4px_25px_4px_rgba(0,0,0,0.10)]  py-12 px-4 lg:px-24 my-20">
+                        <p className="text-center text-3xl text-gray-500 font-medium">
                             Sign in with credentials
                         </p>
 
@@ -50,7 +51,7 @@ const Login = () => {
                             <div className="relative mb-5">
                                 <div className="absolute left-0 inset-y-0 flex items-center"></div>
                             </div>
-                            <div className="relative">
+                            <div className="relative my-5">
                                 <input
                                     className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                                     id="email"
@@ -71,7 +72,7 @@ const Login = () => {
                                     </svg>
                                 </div>
                             </div>
-                            <div className="relative mt-3">
+                            <div className="relative my-5 ">
                                 <input
                                     className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                                     id="username"
@@ -106,7 +107,7 @@ const Login = () => {
                             </div>
                             <div className="flex items-center justify-center mt-8">
                                 <button
-                                    className="text-white py-2 px-4 uppercase rounded bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+                                    className="inline-block bg-black  rounded-full border-2 border-neutral-800 px-6 pb-[6px] pt-2 text-[16px] font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-white hover:text-black focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 "
                                     onClick={(e) => {
                                         loginf(e, username, password);
                                     }}
@@ -115,7 +116,7 @@ const Login = () => {
                                 </button>
                             </div>
                             <hr className="m-4" />
-                            <div className="flex items-center justify-center mt-5">
+                            <div className="flex items-center justify-center  mt-5 ">
                                 <span className=" text-gray-500">
                                     DO NOT HAVE A ACCOUNT ?!
                                 </span>{" "}

@@ -21,16 +21,10 @@ const Guide = () => {
                     <br />
                     <ul className='list-disc text-[15px] text-[#6e6d78]' >
                         <li>
-                            Choose from over 50 custom shoe styles.
+                            Specify the number of questions you will be adding in the survey.
                         </li>
                         <li>
-                            Each shoe style comes each gender.
-                        </li>
-                        <li>
-                            The customizable area varies per shoe.
-                        </li>
-                        <li>
-                        Many styles have black or white soles.
+                            Each question represents a of features in the dataset.
                         </li>
                     </ul>
                 </div>
@@ -38,18 +32,12 @@ const Guide = () => {
                     <img src={step2} alt="" />
                     <br />
                     <p className='font-bold text-[24px] custom'>
-                    Upload Image & Logos:
+                    Populate the features:
                     </p>
                     <br />
                     <ul className='list-disc text-[15px] text-[#6e6d78]'>
                         <li>
-                        Choose The Base Shoe Color
-                        </li>
-                        <li>
-                        Upload images, graphic, logos etc.
-                        </li>
-                        <li>
-                        Upload a color square to different pieces
+                        Add the questions along with a brief description of the question.
                         </li>
                         <li>
                         View mockup of custom shoes in real time
@@ -60,21 +48,15 @@ const Guide = () => {
                     <img src={step3} alt="" />
                     <br />
                     <p className='font-bold text-[24px] custom'>
-                    View Mockup & Buy:
+                    Submit and Share:
                     </p>
                     <br />
                     <ul className='list-disc text-[15px] text-[#6e6d78]'>
                         <li>
-                        Order and start showing off your style
+                        Once you submit the survey, you're all set.
                         </li>
                         <li>
-                        Share mockup pictures on social media
-                        </li>
-                        <li>
-                        Start your own shoe brand
-                        </li>
-                        <li>
-                        Create a branded corporate shoe
+                        Contributors may now be able to add their own data to the dataset.
                         </li>
                     </ul>
                 </div>

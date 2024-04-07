@@ -12,9 +12,9 @@ const Guide = () => {
                 Create Survey in 3 Easy Steps!
             </div>
             <div className='flex gap-4 max-md:flex-col' >
-                <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5'>
+                <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5 '>
                     <img src={step1} alt="" />
-                    {/* <br /> */}
+                    <br />
                     <p className='font-bold text-[24px] custom'>
                     Define a Dataset:
                     </p>

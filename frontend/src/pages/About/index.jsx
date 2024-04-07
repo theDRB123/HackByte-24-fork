@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { JsonToTable } from "react-json-to-table";
 import { redirect, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
@@ -108,17 +109,33 @@ const About = () => {
                     <div className="text-[16px] max-md:text-[16px]  leading-[28px] italic ">
                         {surdata.description}
                     </div>
+                    <br />
+                    <br />
+
+                    <div className="flex gap-2 max-lg:justify-center">
+                        <div>
+                            <button
+                                onClick={handleClick}
+                                className="inline-block rounded-full border-2 border-neutral-800 px-4 pb-[6px] pt-2 text-[16px] font-medium leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-black hover:text-white focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 max-lg:text-[14px]"
+                            >
+                                Run Relevancy Checks
+                            </button>
+                        </div>
+                        <div>
+                            <a href={url} target="_blank">
+                                <button className="inline-block bg-black  rounded-full border-2 border-neutral-800 px-6 pb-[6px] pt-2 text-[16px] font-medium leading-normal text-white transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-white hover:text-black focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 max-lg:text-[14px]">
+                                    Buy This Dataset
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div className="w-[30%]">
                     <CustomActiveShapePieChart data={chartdata} />
                 </div>
             </div>
-            <button onClick={handleClick}>Run checks</button>
-            <br />
-            <a href={url} target="_blank">
-                <button>buy now</button>
-            </a>
-            <div className="w-[70%] m-auto">
+
+            <div className="w-[90%] m-auto">
                 <JsonToTable json={resdata.responses} className="w-[70%]" />
             </div>
         </div>

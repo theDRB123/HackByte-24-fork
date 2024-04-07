@@ -56,7 +56,7 @@ const CustomActiveShapePieChart = ({ data }) => {
   };
 
   return (
-    <PieChart width={500} height={500}>
+    <PieChart width={500} height={360}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import step from "../../assets/step.png"
+import step1 from "../../assets/step1.png"
+import step2 from "../../assets/step2.png"
+import step3 from "../../assets/step3.png"
 
 const Guide = () => {
     return (
@@ -11,7 +13,7 @@ const Guide = () => {
             </div>
             <div className='flex gap-4 max-md:flex-col' >
                 <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5'>
-                    <img src={step} alt="" />
+                    <img src={step1} alt="" />
                     {/* <br /> */}
                     <p className='font-bold text-[24px] custom'>
                     Define a Dataset:
@@ -27,7 +29,7 @@ const Guide = () => {
                     </ul>
                 </div>
                 <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5'>
-                    <img src={step} alt="" />
+                    <img src={step2} alt="" />
                     <br />
                     <p className='font-bold text-[24px] custom'>
                     Add Questions:
@@ -43,7 +45,7 @@ const Guide = () => {
                     </ul>
                 </div>
                 <div className='rounded-2xl shadow-[2px_4px_35px_4px_rgba(0,0,0,0.10)] px-10 py-5'>
-                    <img src={step} alt="" />
+                    <img src={step3} alt="" />
                     <br />
                     <p className='font-bold text-[24px] custom'>
                     Submit and Share:

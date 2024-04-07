@@ -89,8 +89,8 @@ const About = () => {
             <a href={url} target="_blank">
                 <button>buy now</button>
             </a>
-            <div className="">
-                <JsonToTable json={resdata.responses} />
+            <div className="w-[70%] m-auto">
+                <JsonToTable json={resdata.responses} className="w-[70%]" />
             </div>
         </div>
     );

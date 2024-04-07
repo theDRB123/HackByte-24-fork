@@ -6,8 +6,6 @@ import axios from "axios";
 
 import CustomActiveShapePieChart from "../../components/chart";
 
-
-
 const About = () => {
     const [resdata, setresData] = useState([]);
     const [url, seturl] = useState("");
@@ -21,6 +19,28 @@ const About = () => {
             { name: "jane", email: "jane@@xyz.com" },
         ],
     };
+    const [surdata, setsurData] = React.useState("");
+
+    React.useEffect(() => {
+        const fetchSurData = async () => {
+            try {
+                const { data } = await axios.get(
+                    `http://localhost:5000/surveys/${id}`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                setsurData(data.surveys[0]);
+                console.log(data.surveys[0]);
+            } catch (error) {
+                console.error("Error fetching survey data:", error);
+            }
+        };
+
+        fetchSurData();
+    }, [id]);
 
     useEffect(() => {
         const fetchcart = async () => {
@@ -35,9 +55,9 @@ const About = () => {
             console.log(data);
             setresData(data);
             const newData = [
-              { name: 'Anomaly', value: data["Anomaly"] },
-              { name: 'Not Anomaly', value: data["Not Anomaly"] },
-              { name: 'Not Checked', value: data["Not Checked"] }
+                { name: "Anomaly", value: data["Anomaly"] },
+                { name: "Not Anomaly", value: data["Not Anomaly"] },
+                { name: "Not Checked", value: data["Not Checked"] },
             ];
             setechartdata(newData);
         };
@@ -76,13 +96,22 @@ const About = () => {
             toast.error(error.response.data.error || "An error occurred");
         }
     };
-   
+
     return (
         <div>
-            <div className="flex justify-end mx-4">
-              <div>
-                <CustomActiveShapePieChart data={chartdata} />
-              </div>
+            <div className="flex mx-4 my-4 justify-around">
+                <div className="py-12 w-[50%]">
+                    <div className="text-[35px] max-md:text-[24px]  leading-tight custom ">
+                        {surdata.title}
+                    </div>
+                    <br />
+                    <div className="text-[16px] max-md:text-[16px]  leading-[28px] italic ">
+                        {surdata.description}
+                    </div>
+                </div>
+                <div className="w-[30%]">
+                    <CustomActiveShapePieChart data={chartdata} />
+                </div>
             </div>
             <button onClick={handleClick}>Run checks</button>
             <br />
